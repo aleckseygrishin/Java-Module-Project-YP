@@ -24,17 +24,26 @@ public class Main {
     static int checkCorrectSpeed (int numberCar) {
         Scanner scanner = new Scanner(System.in);
         int speed;
+        String tryAgain = "Попробуйте снова.";
 
         while (true) {
             System.out.println(String.format("Введите скорость машины №%d: ", numberCar));
-            speed = scanner.nextInt();
 
-            if (speed > 0 && speed <= 250) {
-                System.out.println("Скорость введена верно.");
-                return speed;
+            if (scanner.hasNextInt()) {
+                speed = scanner.nextInt();
+
+                if (speed > 0 && speed <= 250) {
+                    System.out.println("Скорость введена верно.");
+                    return speed;
+                } else {
+                    System.out.println("Скорость не попала в диапазон от 0 до 250.");
+                    System.out.println(tryAgain);
+                }
             } else {
-                System.out.println("Не верное значение скорости.");
-                System.out.println("Попробуйте снова.");
+                System.out.println("Введен некорректный тип данных. (Ожидается целое число)");
+                System.out.println(tryAgain);
+
+                scanner.next();
             }
         }
     }
